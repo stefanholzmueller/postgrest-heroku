@@ -1,6 +1,7 @@
 #!/bin/bash
 
 CONF_PATH="$2"
+DB_URI="$3"
 
 #available config options
 config_settings=(
@@ -27,6 +28,12 @@ for conf in "${config_settings[@]}"; do
       echo "${conf}=\"${val}\"" >> $CONF_PATH
     else
       echo "${conf}=${val}" >> $CONF_PATH
+    fi
+  else
+    echo "conf=$conf"
+    echo "DB_URI=$DB_URI"
+    if [ "${conf}" = "db-uri" ]; then
+      echo "${conf}=\"$DB_URI\"" >> $CONF_PATH
     fi
   fi
 done
